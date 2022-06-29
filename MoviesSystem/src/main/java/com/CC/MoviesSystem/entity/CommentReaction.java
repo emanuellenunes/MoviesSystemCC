@@ -15,7 +15,11 @@ import javax.persistence.Table;
 import com.CC.MoviesSystem.enumeration.Reaction;
 
 import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "COMMENT_REACTION")

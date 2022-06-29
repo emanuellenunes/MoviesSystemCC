@@ -5,9 +5,10 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.CC.MoviesSystem.dto.MovieSearch;
-import com.CC.MoviesSystem.dto.MultiMovieSearch;
 import com.CC.MoviesSystem.dto.RatingDTO;
+import com.CC.MoviesSystem.entity.MovieDetails;
+import com.CC.MoviesSystem.entity.MoviePreview;
+import com.CC.MoviesSystem.entity.MultiMoviePreview;
 import com.CC.MoviesSystem.entity.Rating;
 import com.CC.MoviesSystem.enumeration.Profile;
 import com.CC.MoviesSystem.entity.User;
@@ -30,14 +31,14 @@ public class MovieService {
         this.userRepository = userRepository;
     }
 
-    public List<MovieSearch> searchByTitle(String title, String token) {
+    public List<MoviePreview> searchByTitle(String title, String token) {
         User user = findUserByToken(token);
         validateProfile(user, Profile.READER);
-        MultiMovieSearch multiMovieSearch = movieRepository.searchByTitle(title);
-        return multiMovieSearch.getResultList();
+        MultiMoviePreview multiMoviePreview = movieRepository.searchByTitle(title);
+        return multiMoviePreview.getResultList();
     }
 
-    public MovieSearch searchById(String idMovie, String token) {
+    public MovieDetails searchById(String idMovie, String token) {
         User user = findUserByToken(token);
         validateProfile(user, Profile.READER);
         return movieRepository.searchById(idMovie);

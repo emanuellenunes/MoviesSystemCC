@@ -1,4 +1,4 @@
-package com.CC.MoviesSystem.dto;
+package com.CC.MoviesSystem.entity;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MultiMovieSearch {
+public class MultiMoviePreview {
 
     @JsonProperty("Search")
-    private List<MovieSearch> resultList;
+    private List<MoviePreview> resultList;
 
     @JsonProperty("Response")
     private Boolean response;

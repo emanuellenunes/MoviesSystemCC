@@ -1,4 +1,4 @@
-package com.CC.MoviesSystem.controller;
+package com.CC.Authentication.controller;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.CC.MoviesSystem.service.UserRegistrationService;
-import com.CC.MoviesSystem.dto.UserDTO;
-import com.CC.MoviesSystem.entity.User;
+import com.CC.Authentication.service.UserRegistrationService;
+import com.CC.Authentication.dto.UserDTO;
+import com.CC.Authentication.entity.User;
 
 @RestController
 public class UserRegistrationController {

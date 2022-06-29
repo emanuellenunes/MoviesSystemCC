@@ -13,7 +13,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Max;
 
 import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "RATING")

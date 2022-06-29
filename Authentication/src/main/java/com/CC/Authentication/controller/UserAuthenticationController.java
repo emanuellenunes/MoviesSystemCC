@@ -1,4 +1,4 @@
-package com.CC.MoviesSystem.controller;
+package com.CC.Authentication.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.CC.MoviesSystem.entity.User;
-import com.CC.MoviesSystem.service.UserAuthenticationService;
-import com.CC.MoviesSystem.dto.LoginDTO;
+import com.CC.Authentication.entity.User;
+import com.CC.Authentication.service.UserAuthenticationService;
+import com.CC.Authentication.dto.LoginDTO;
 
 @RestController
 public class UserAuthenticationController {

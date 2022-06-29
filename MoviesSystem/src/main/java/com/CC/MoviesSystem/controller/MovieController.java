@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.CC.MoviesSystem.dto.MovieSearch;
 import com.CC.MoviesSystem.dto.RatingDTO;
+import com.CC.MoviesSystem.entity.MovieDetails;
+import com.CC.MoviesSystem.entity.MoviePreview;
 import com.CC.MoviesSystem.service.MovieService;
 
 @RestController
@@ -27,21 +28,21 @@ public class MovieController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<MovieSearch>> search(@RequestHeader String Authorization, @Valid @RequestBody String movieTitle) {
-        List<MovieSearch> moviesList = movieSearchService.searchByTitle(movieTitle, Authorization);
-        return new ResponseEntity<List<MovieSearch>>(moviesList, HttpStatus.ACCEPTED);
+    public ResponseEntity<List<MoviePreview>> search(@RequestHeader String Authorization, @Valid @RequestBody String movieTitle) {
+        List<MoviePreview> moviesList = movieSearchService.searchByTitle(movieTitle, Authorization);
+        return new ResponseEntity<List<MoviePreview>>(moviesList, HttpStatus.OK);
     }
 
     @GetMapping("/search/")
-    public ResponseEntity<MovieSearch> searchByMovieId(@RequestHeader String Authorization, @Valid @RequestParam String movieId) {
-        MovieSearch movie = movieSearchService.searchById(movieId, Authorization);
-        return new ResponseEntity<MovieSearch>(movie, HttpStatus.ACCEPTED);
+    public ResponseEntity<MovieDetails> searchByMovieId(@RequestHeader String Authorization, @Valid @RequestParam String movieId) {
+        MovieDetails movie = movieSearchService.searchById(movieId, Authorization);
+        return new ResponseEntity<MovieDetails>(movie, HttpStatus.OK);
     }
 
     @PostMapping("/rate/")
     public ResponseEntity<RatingDTO> rate(@RequestHeader String Authorization, @RequestParam String movieId, @Valid @RequestBody int score) {
         RatingDTO rating = movieSearchService.rate(movieId, score, Authorization);
-        return new ResponseEntity<RatingDTO>(rating, HttpStatus.ACCEPTED);
+        return new ResponseEntity<RatingDTO>(rating, HttpStatus.OK);
     }
     
 }

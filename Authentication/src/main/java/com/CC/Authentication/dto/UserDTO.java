@@ -1,6 +1,6 @@
-package com.CC.MoviesSystem.dto;
+package com.CC.Authentication.dto;
 
-import com.CC.MoviesSystem.entity.User;
+import com.CC.Authentication.entity.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

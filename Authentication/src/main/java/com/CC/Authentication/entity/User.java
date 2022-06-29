@@ -1,4 +1,4 @@
-package com.CC.MoviesSystem.entity;
+package com.CC.Authentication.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,8 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.CC.MoviesSystem.dto.UserDTO;
-import com.CC.MoviesSystem.enumeration.Profile;
+import com.CC.Authentication.dto.UserDTO;
+import com.CC.Authentication.enumeration.Profile;
 
 import lombok.Data;
 import lombok.AllArgsConstructor;
