@@ -1,4 +1,4 @@
-package com.CC.MoviesSystem.entity;
+package com.CC.MoviesSystem.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Arrays;
@@ -11,13 +11,31 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode
-public class Movie {
+public class MovieSearch {
 
     @JsonProperty("imdbID")
     private String imdbId;
 
     @JsonProperty("Title")
     private String title;
+
+    @JsonProperty("Genre")
+    private String genre;
+
+    @JsonProperty("Director")
+    private String director;
+
+    @JsonProperty("Plot")
+    private String plot;
+
+    @JsonProperty("Type")
+    private String type;
+
+    @JsonProperty("imdbRating")
+    private Float imdbRating;
+    public void setRating(String imdbRating) {
+        this.imdbRating = Float.parseFloat(imdbRating);
+    }
 
     @JsonProperty("Year")
     private Integer year;

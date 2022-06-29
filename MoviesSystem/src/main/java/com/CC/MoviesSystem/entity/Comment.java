@@ -5,23 +5,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
 
-@Entity
-@Table(name = "comment")
 @Data
+@Entity
+@Table(name = "COMMENT")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    
+
     @Column(nullable = false)
-    private String idMovie; //foreign key
+    private String idMovie;
     
+    //@ManyToOne
+    //@JoinColumn(name="USERS")
+    //private User idUser;
+
     @Column(nullable = false)
-    private long idUser; //foreign key
+    private long idUser;
     
     @Column(nullable = false)
     private String description;
@@ -34,6 +40,9 @@ public class Comment {
     
     @Column(nullable = false, columnDefinition = "boolean default false")
     private Boolean repeated;
+
+    @Column(nullable = true)
+    private long idAnsweredComment; //Store the comment id without using a foreign key for that
     
     @Column(nullable = true)
     private long idLinkedComment; //Store the comment id without using a foreign key for that

@@ -1,5 +1,7 @@
 package com.CC.MoviesSystem.dto;
 
+import com.CC.MoviesSystem.entity.Rating;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -7,7 +9,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class RatingDTO {
 
-    private int rating;
-    private String idMovie;
+    private Rating rating;
+    private MovieSearch movie;
     
 }

@@ -18,7 +18,7 @@ public class UserRegistrationService {
     }
 
     public User registrate(User user) {
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) throw new ExistentEmailException();
+        if (userRepository.existsByEmail(user.getEmail())) throw new ExistentEmailException();
         user.setToken(tokenService.generateToken(user));
         return userRepository.save(user);
     }

@@ -9,21 +9,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.CC.MoviesSystem.enumeration.Reaction;
+
 import lombok.Data;
 
-@Entity
-@Table(name = "comment_reaction")
 @Data
+@Entity
+@Table(name = "COMMENT_REACTION")
 public class CommentReaction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(nullable = false)
-    private long idUser; //foreign key
+    private long idUser;
 
     @Column(nullable = false)
-    private String idComment; //foreign key
+    private long idComment;
 
     @Column(nullable = true)
     @Enumerated(EnumType.STRING)

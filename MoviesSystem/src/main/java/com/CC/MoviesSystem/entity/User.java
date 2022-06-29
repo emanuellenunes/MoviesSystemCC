@@ -9,13 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.CC.MoviesSystem.enumeration.Profile;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
 @Data
 @NoArgsConstructor
+@Table(name = "USERS")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +31,7 @@ public class User {
     private Profile profile = Profile.BASIC; //Store the comment id without using a foreign key for that, since Profile is not a TABLE in the database
 
     @Column(nullable = false, columnDefinition = "integer default 0")
-    private int points;
+    private int score;
 
     @Column(nullable = false)
     private String email;
@@ -45,5 +47,10 @@ public class User {
         this.email = email;
         this.password = password;
         this.token = token;
+    }
+
+    public int scoreIncrement(){
+        this.score++;
+        return score;
     }
 }

@@ -11,9 +11,9 @@ import javax.validation.constraints.Max;
 
 import lombok.Data;
 
-@Entity
-@Table(name = "rating")
 @Data
+@Entity
+@Table(name = "RATING")
 public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,13 +26,13 @@ public class Rating {
     private long idUser; //foreign key
     
     @Column(nullable = false)
-    @Max(5)
-    @Min(1)
-    private int stars;
+    @Max(10)
+    @Min(0)
+    private int score;
 
-    public Rating(String idMovie, long idUser, int stars){
+    public Rating(String idMovie, long idUser, int score){
         this.idMovie = idMovie;
         this.idUser = idUser;
-        this.stars = stars;
+        this.score = score;
     }
 }

@@ -1,5 +1,6 @@
 package com.CC.MoviesSystem.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,4 +11,5 @@ import com.CC.MoviesSystem.entity.Rating;
 @Repository
 public interface RatingRepository extends JpaRepository<Rating, Long> {
     Optional<Rating> findByIdMovieAndIdUser(String idMovie, long idUser);
+    Optional<List<Rating>> findByIdMovie(String idMovie);
 }

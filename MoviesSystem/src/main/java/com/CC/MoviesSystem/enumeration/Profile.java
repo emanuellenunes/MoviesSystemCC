@@ -1,4 +1,4 @@
-package com.CC.MoviesSystem.entity;
+package com.CC.MoviesSystem.enumeration;
 
 public enum Profile {
     READER, BASIC, ADVANCED, MODERATOR
