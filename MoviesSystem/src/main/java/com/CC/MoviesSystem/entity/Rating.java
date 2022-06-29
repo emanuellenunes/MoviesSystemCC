@@ -2,9 +2,12 @@ package com.CC.MoviesSystem.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Max;
@@ -22,17 +25,18 @@ public class Rating {
     @Column(nullable = false)
     private String idMovie; //foreign key
     
-    @Column(nullable = false)
-    private long idUser; //foreign key
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="USERS")
+    private User user;
     
     @Column(nullable = false)
     @Max(10)
     @Min(0)
     private int score;
 
-    public Rating(String idMovie, long idUser, int score){
+    public Rating(String idMovie, User user, int score){
         this.idMovie = idMovie;
-        this.idUser = idUser;
+        this.user = user;
         this.score = score;
     }
 }

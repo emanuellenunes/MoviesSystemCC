@@ -4,9 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.CC.MoviesSystem.enumeration.Reaction;
@@ -21,11 +24,13 @@ public class CommentReaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(nullable = false)
-    private long idUser;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="USERS")
+    private User user;
 
-    @Column(nullable = false)
-    private long idComment;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="COMMENT")
+    private Comment comment;
 
     @Column(nullable = true)
     @Enumerated(EnumType.STRING)

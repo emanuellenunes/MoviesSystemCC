@@ -49,8 +49,8 @@ public class MovieService {
         validateProfile(user, Profile.READER);
         validateRating(score);
 
-        Optional<Rating> existentRating = ratingRepository.findByIdMovieAndIdUser(movieId,user.getId());
-        Rating rating = new Rating(movieId, user.getId(), score);
+        Optional<Rating> existentRating = ratingRepository.findByIdMovieAndUser(movieId,user);
+        Rating rating = new Rating(movieId, user, score);
         if (existentRating.isPresent()) {
             rating.setId(existentRating.get().getId());
         }

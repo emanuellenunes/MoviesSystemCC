@@ -2,6 +2,7 @@ package com.CC.MoviesSystem.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,12 +23,9 @@ public class Comment {
     @Column(nullable = false)
     private String idMovie;
     
-    //@ManyToOne
-    //@JoinColumn(name="USERS")
-    //private User idUser;
-
-    @Column(nullable = false)
-    private long idUser;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="USERS")
+    private User user;
     
     @Column(nullable = false)
     private String description;
