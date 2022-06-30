@@ -5,12 +5,14 @@ import com.CC.MoviesSystem.entity.MovieDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class CommentDTO {
 
-    private Comment comment;
-    private MovieDetails movie;
+    protected Comment comment;
+    protected MovieDetails movie;
     
 }

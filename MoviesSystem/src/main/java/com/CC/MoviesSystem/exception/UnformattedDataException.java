@@ -1,8 +1,8 @@
 package com.CC.MoviesSystem.exception;
 
-public class UnformattedData extends RuntimeException {
+public class UnformattedDataException extends RuntimeException {
 
-    public UnformattedData() {
+    public UnformattedDataException() {
         super("This data format/value is not valid.");
     }
     

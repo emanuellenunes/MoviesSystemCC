@@ -39,5 +39,11 @@ public class CommentReaction {
     @Column(nullable = true)
     @Enumerated(EnumType.STRING)
     private Reaction reaction;
+
+    public CommentReaction(User user, Comment comment, Reaction reaction){
+        this.user = user;
+        this.comment = comment;
+        this.reaction = reaction;
+    }
     
 }

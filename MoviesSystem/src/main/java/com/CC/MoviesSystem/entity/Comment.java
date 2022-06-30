@@ -44,14 +44,37 @@ public class Comment {
     private boolean repeated;
 
     @Column(nullable = true)
-    private long idAnsweredComment; //Store the comment id without using a foreign key for that
+    private Long idAnsweredComment; //Store the comment id without using a foreign key for that
     
     @Column(nullable = true)
-    private long idLinkedComment; //Store the comment id without using a foreign key for that
+    private Long idLinkedComment; //Store the comment id without using a foreign key for that
 
     public Comment(String idMovie, User user, String description) {
         this.idMovie = idMovie;
         this.user = user;
         this.description = description;
+    }
+
+    public Comment(String idMovie, User user, String description, long idAnsweredComment) {
+        this.idMovie = idMovie;
+        this.user = user;
+        this.description = description;
+        this.idAnsweredComment = idAnsweredComment;
+    }
+
+    public void increaseLikeCount() {
+        this.likeCount++;
+    }
+
+    public void increaseUnlikeCount() {
+        this.unlikeCount++;
+    }
+
+    public void decreaseLikeCount() {
+        this.likeCount--;
+    }
+
+    public void decreaseUnlikeCount() {
+        this.unlikeCount--;
     }
 }

@@ -1,8 +1,8 @@
 package com.CC.MoviesSystem.exception;
 
-public class UnauthorizedUser extends RuntimeException {
+public class UnauthorizedUserException extends RuntimeException {
 
-    public UnauthorizedUser() {
+    public UnauthorizedUserException() {
         super("This functionality is not available for your profile.");
     }
     
