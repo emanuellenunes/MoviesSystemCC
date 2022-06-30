@@ -31,7 +31,7 @@ public class Comment {
     @JoinColumn(name="USERS")
     private User user;
     
-    @Column(nullable = false)
+    @Column(nullable = false, length = 260)
     private String description;
     
     @Column(nullable = false, columnDefinition = "integer default 0")
@@ -40,12 +40,18 @@ public class Comment {
     @Column(nullable = false, columnDefinition = "integer default 0")
     private int unlikeCount;
     
-    @Column(nullable = false, columnDefinition = "boolean default false")
-    private Boolean repeated;
+    @Column(columnDefinition = "boolean default false")
+    private boolean repeated;
 
     @Column(nullable = true)
     private long idAnsweredComment; //Store the comment id without using a foreign key for that
     
     @Column(nullable = true)
     private long idLinkedComment; //Store the comment id without using a foreign key for that
+
+    public Comment(String idMovie, User user, String description) {
+        this.idMovie = idMovie;
+        this.user = user;
+        this.description = description;
+    }
 }

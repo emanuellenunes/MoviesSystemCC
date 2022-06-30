@@ -8,7 +8,7 @@ import com.CC.MoviesSystem.dto.RatingDTO;
 import com.CC.MoviesSystem.entity.Rating;
 import com.CC.MoviesSystem.entity.User;
 import com.CC.MoviesSystem.enumeration.Profile;
-import com.CC.MoviesSystem.exception.InvalidTokenException;
+import com.CC.MoviesSystem.exception.UnformattedData;
 import com.CC.MoviesSystem.repository.MovieRepository;
 import com.CC.MoviesSystem.repository.RatingRepository;
 
@@ -44,7 +44,7 @@ public class RatingService {
     }
 
     private void validateRating(int score) {
-        assert score >= 0 && score <= 10 : new InvalidTokenException();
+        assert score >= 0 && score <= 10 : new UnformattedData();
     }
     
 }
