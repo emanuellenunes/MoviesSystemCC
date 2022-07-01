@@ -36,9 +36,9 @@ public class CommentReaction {
     @JoinColumn(name="COMMENT")
     private Comment comment;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Reaction reaction;
+    private Reaction reaction = Reaction.NONE;
 
     public CommentReaction(User user, Comment comment, Reaction reaction){
         this.user = user;

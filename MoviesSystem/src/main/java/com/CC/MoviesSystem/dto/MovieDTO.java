@@ -1,5 +1,11 @@
 package com.CC.MoviesSystem.dto;
 
+import java.util.Set;
+
+import com.CC.MoviesSystem.entity.Comment;
+import com.CC.MoviesSystem.entity.MovieDetails;
+import com.CC.MoviesSystem.entity.Rating;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -7,11 +13,11 @@ import lombok.Data;
 @Data
 public class MovieDTO {
 
-    private String title;
-    private String id;
-
-    public MovieDTO(String title) {
-        this.title = title;
-    }
+    private MovieDetails movie;
+    private Set<Comment> commentList;
+    private Set<Rating> ratingList;
     
+    public MovieDTO(MovieDetails movie){
+        this.movie = movie;
+    }
 }

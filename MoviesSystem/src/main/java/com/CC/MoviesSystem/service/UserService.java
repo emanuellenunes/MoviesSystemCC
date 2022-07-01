@@ -2,8 +2,10 @@ package com.CC.MoviesSystem.service;
 
 import org.springframework.stereotype.Service;
 
+import com.CC.MoviesSystem.dto.UserDTO;
 import com.CC.MoviesSystem.entity.User;
 import com.CC.MoviesSystem.enumeration.Profile;
+import com.CC.MoviesSystem.exception.InvalidIdException;
 import com.CC.MoviesSystem.exception.InvalidTokenException;
 import com.CC.MoviesSystem.exception.UnauthorizedUserException;
 import com.CC.MoviesSystem.repository.UserRepository;
@@ -49,6 +51,25 @@ public class UserService {
             currProfile = Profile.MODERATOR;
         }
         return currProfile;
+    }
+
+    public UserDTO turnModerator(String email, String token) {
+        User currUser = findUserByToken(token);
+        validateProfile(currUser, Profile.MODERATOR);
+
+        User userToUpdate = userRepository.findByEmail(email).orElseThrow(() -> new InvalidIdException("email"));
+
+        if (!userToUpdate.getProfile().equals(Profile.MODERATOR)) {
+            userToUpdate.setProfile(Profile.MODERATOR);
+            userToUpdate = userRepository.save(userToUpdate);
+        }
+
+        return userToUpdate.toDTO();
+    }
+
+    public UserDTO searchUserByToken(String token) {
+        User user = findUserByToken(token);
+        return user.toDTO();
     }
     
 }

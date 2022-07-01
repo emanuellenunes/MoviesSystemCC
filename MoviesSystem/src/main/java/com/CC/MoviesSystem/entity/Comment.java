@@ -1,5 +1,7 @@
 package com.CC.MoviesSystem.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -47,19 +49,29 @@ public class Comment {
     private Long idAnsweredComment; //Store the comment id without using a foreign key for that
     
     @Column(nullable = true)
-    private Long idLinkedComment; //Store the comment id without using a foreign key for that
+    private String idLinkedComment; //Store the comment id without using a foreign key for that
 
+    //Simple Comment
     public Comment(String idMovie, User user, String description) {
         this.idMovie = idMovie;
         this.user = user;
         this.description = description;
     }
 
-    public Comment(String idMovie, User user, String description, long idAnsweredComment) {
+    //Comment Answer
+    public Comment(String idMovie, User user, String description, List<Long> idLinkedComment, long idAnsweredComment) {
         this.idMovie = idMovie;
         this.user = user;
         this.description = description;
         this.idAnsweredComment = idAnsweredComment;
+    }
+
+    //Comment with Linked Comments
+    public Comment(String idMovie, User user, String description, String idLinkedComment) {
+        this.idMovie = idMovie;
+        this.user = user;
+        this.description = description;
+        this.idLinkedComment = idLinkedComment;
     }
 
     public void increaseLikeCount() {

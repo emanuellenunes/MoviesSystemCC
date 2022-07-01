@@ -31,7 +31,7 @@ public class User {
 
     @Column(nullable = false) //, columnDefinition = "varchar(255) default BASIC"
     @Enumerated(EnumType.STRING)
-    private Profile profile = Profile.BASIC; //Store the comment id without using a foreign key for that, since Profile is not a TABLE in the database
+    private Profile profile = Profile.READER; //Store the comment id without using a foreign key for that, since Profile is not a TABLE in the database
 
     @Column(nullable = false, columnDefinition = "integer default 0")
     private int score;

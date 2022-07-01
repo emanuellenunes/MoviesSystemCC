@@ -1,6 +1,7 @@
 package com.CC.MoviesSystem.dto;
 
 import com.CC.MoviesSystem.entity.User;
+import com.CC.MoviesSystem.enumeration.Profile;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,11 +12,9 @@ public class UserDTO {
 
     private String name;
     private String email;
-    private String password;
-    private String token;
-    private String kind;
+    private Profile profile;
     
     public User toUser() {
-        return new User(this.name, this.email, this.password, this.token);
+        return new User(this.name, this.email, this.profile);
     }
 }

@@ -25,7 +25,7 @@ public class UserRegistrationController {
         this.userRegistrationService = userRegistrationService;
     }
 
-    @PostMapping("/user")
+    @PostMapping("/sign-up")
     public ResponseEntity<String> registrate(@RequestBody UserDTO userRegistrationDTO) {
         User user = userRegistrationService.registrate(userRegistrationDTO.toUser());
         return new ResponseEntity<String>(user.toDTO("Bearer ").getToken(), HttpStatus.CREATED);

@@ -12,5 +12,6 @@ import com.CC.MoviesSystem.entity.User;
 @Repository
 public interface RatingRepository extends JpaRepository<Rating, Long> {
     Optional<Rating> findByIdMovieAndUser(String idMovie, User user);
+    Optional<Rating> findById(long id);
     Optional<List<Rating>> findByIdMovie(String idMovie);
 }

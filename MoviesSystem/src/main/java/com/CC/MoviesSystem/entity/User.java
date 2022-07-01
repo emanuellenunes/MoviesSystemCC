@@ -45,18 +45,17 @@ public class User {
     @Column(nullable = true)
     private String token;
 
-    public User(String name, String email, String password, String token){
+    public User(String name, String email, Profile profile){
         this.name = name;
         this.email = email;
-        this.password = password;
-        this.token = token;
+        this.profile = profile;
     }
 
     public void scoreIncrement() {
         this.score++;
     }
     
-    public UserDTO toDTO(String kind) {
-        return new UserDTO(this.name, this.email, this.password, this.token, kind);
+    public UserDTO toDTO() {
+        return new UserDTO(this.name, this.email, this.profile);
     }
 }
