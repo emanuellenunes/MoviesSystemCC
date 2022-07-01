@@ -24,7 +24,7 @@ public class RatingController {
         this.ratingService = ratingService;
     }
 
-    @PostMapping("/rate")
+    @PostMapping("/rate/")
     public ResponseEntity<RatingDTO> rate(@RequestHeader String Authorization, @RequestParam String movieId, @Valid @RequestBody int score) {
         RatingDTO rating = ratingService.rate(movieId, score, Authorization);
         return new ResponseEntity<RatingDTO>(rating, HttpStatus.OK);

@@ -28,7 +28,7 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/comment")
+    @PostMapping("/comment/")
     public ResponseEntity<CommentDTO> comment(@RequestHeader String Authorization, @RequestParam String movieId, @Valid @RequestBody CommentEntryDTO commentDTO) {
         CommentDTO comment = commentService.comment(movieId, commentDTO, Authorization);
         return new ResponseEntity<CommentDTO>(comment, HttpStatus.OK);

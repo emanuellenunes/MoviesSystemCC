@@ -1,0 +1,1 @@
+{"id":"9f90525b-e66a-4cee-bae7-d8a56f234353","name":"New Environment","values":[{"key":"token","value":"","enabled":true,"type":"default"},{"key":"MoviesSystem","value":"http://localhost:8080/","enabled":true,"type":"default"},{"key":"Authorization","value":"http://localhost:8081/","enabled":true,"type":"default"}]}

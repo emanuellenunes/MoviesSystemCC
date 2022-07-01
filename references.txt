@@ -54,3 +54,5 @@ public ResponseEntity<Response<UserDTO>> create(@Valid @RequestBody UserDTO dto,
     "description":"First comment answer",
     "reaction":"UNLIKE"
 }
+
+Pode configurar o h2 em memória ou necessariamente tem que ser pelo menos um arquivo?
