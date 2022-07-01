@@ -12,6 +12,10 @@ Persistir se os ids linkados são válidos
 Pendente:
 comment_repeated Mark comments of other people as repeated
 comment_delete Delete comment answer - delete comment answer when the comment is deleted - delete comment reaction when the comment is deleted - persist idLinkedComment when it is deleted
+Limitar citação ao perfil correto
+no token return null
+
+throws ExpectionType() {
 
 Autenticação
 https://www.treinaweb.com.br/blog/implementando-autenticacao-baseada-em-jwt-em-uma-api-restful-jax-rs
@@ -37,9 +41,6 @@ https://tom-collings.medium.com/controller-service-repository-16e29a4684e5
 https://www.omdbapi.com/
 https://www.youtube.com/watch?v=UjQO3HSd6Ys&t=1075s
 
-
-entity e repository seriam duplicadas
-
 Cache:
 https://www.devmedia.com.br/entendendo-o-hibernate-cache-em-detalhes/30391
 
@@ -61,3 +62,10 @@ public ResponseEntity<Response<UserDTO>> create(@Valid @RequestBody UserDTO dto,
 }
 
 Pode configurar o h2 em memória ou necessariamente tem que ser pelo menos um arquivo?
+
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>

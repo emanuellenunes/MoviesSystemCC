@@ -53,7 +53,7 @@ public class RatingService {
     }
 
     private void validateRating(int score) {
-        if (score < 0 || score > 10) throw new UnformattedDataException();
+        if (score < 0 || score > 10) throw new UnformattedDataException("value");
     }
 
     public RatingDTO searchRatingById(long ratingId, String token) {
