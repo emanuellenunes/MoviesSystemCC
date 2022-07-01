@@ -1,7 +1,5 @@
 package com.CC.MoviesSystem.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -59,10 +57,11 @@ public class Comment {
     }
 
     //Comment Answer
-    public Comment(String idMovie, User user, String description, List<Long> idLinkedComment, long idAnsweredComment) {
+    public Comment(String idMovie, User user, String description, String idLinkedComment, long idAnsweredComment) {
         this.idMovie = idMovie;
         this.user = user;
         this.description = description;
+        this.idLinkedComment = idLinkedComment;
         this.idAnsweredComment = idAnsweredComment;
     }
 

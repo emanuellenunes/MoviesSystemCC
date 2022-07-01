@@ -7,6 +7,11 @@ Remove hardcoded API key
 Remove hardcoded DB path
 Implementar cache para as outras entidades
 Acertar o retorno http dos controlers (deletar comentários?)
+Persistir se os ids linkados são válidos
+
+Pendente:
+comment_repeated Mark comments of other people as repeated
+comment_delete Delete comment answer - delete comment answer when the comment is deleted - delete comment reaction when the comment is deleted - persist idLinkedComment when it is deleted
 
 Autenticação
 https://www.treinaweb.com.br/blog/implementando-autenticacao-baseada-em-jwt-em-uma-api-restful-jax-rs

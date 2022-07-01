@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.CC.MoviesSystem.dto.CommentDTO;
 import com.CC.MoviesSystem.dto.CommentEntryDTO;
 import com.CC.MoviesSystem.dto.CommentReactionDTO;
-import com.CC.MoviesSystem.enumeration.Reaction;
+import com.CC.MoviesSystem.dto.CommentReactionEntryDTO;
 import com.CC.MoviesSystem.service.CommentService;
 
 @RestController
@@ -47,8 +47,8 @@ public class CommentController {
     }
 
     @PostMapping("/comment/id={commentId}/react")
-    public ResponseEntity<CommentReactionDTO> reactToComment(@RequestHeader String Authorization, @PathVariable long commentId, @Valid @RequestBody Reaction reaction) {
-        CommentReactionDTO comment = commentService.reactToComment(reaction, commentId, Authorization);
+    public ResponseEntity<CommentReactionDTO> reactToComment(@RequestHeader String Authorization, @PathVariable long commentId, @Valid @RequestBody CommentReactionEntryDTO reactionDTO) {
+        CommentReactionDTO comment = commentService.reactToComment(reactionDTO, commentId, Authorization);
         return new ResponseEntity<CommentReactionDTO>(comment, HttpStatus.OK);
     }
 

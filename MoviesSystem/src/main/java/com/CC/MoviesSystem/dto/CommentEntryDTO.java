@@ -10,7 +10,7 @@ import lombok.Data;
 public class CommentEntryDTO {
 
     private String description;
-    private List<Long> idAnsweredComment;
+    private List<Long> idLinkedComment;
 
     public CommentEntryDTO(String description) {
         this.description = description;

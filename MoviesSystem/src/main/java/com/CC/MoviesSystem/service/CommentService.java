@@ -12,6 +12,7 @@ import com.CC.MoviesSystem.dto.CommentAnswerDTO;
 import com.CC.MoviesSystem.dto.CommentDTO;
 import com.CC.MoviesSystem.dto.CommentEntryDTO;
 import com.CC.MoviesSystem.dto.CommentReactionDTO;
+import com.CC.MoviesSystem.dto.CommentReactionEntryDTO;
 import com.CC.MoviesSystem.entity.Comment;
 import com.CC.MoviesSystem.entity.CommentReaction;
 import com.CC.MoviesSystem.entity.Movie;
@@ -48,7 +49,9 @@ public class CommentService {
         User user = userService.findUserByToken(token);
         userService.validateProfile(user, Profile.BASIC);
 
-        Comment comment = new Comment(movieId, user, commentDTO.getDescription(), commentDTO.getIdAnsweredComment().toString());
+        String idLinkedComment = null;
+        if (!commentDTO.getIdLinkedComment().isEmpty()) idLinkedComment = commentDTO.getIdLinkedComment().toString();
+        Comment comment = new Comment(movieId, user, commentDTO.getDescription(), idLinkedComment);
         comment = saveComment(comment);
 
         return new CommentDTO(comment, omdbRepository.findById(movieId));
@@ -71,7 +74,9 @@ public class CommentService {
 
         Comment originalComment = validateReferencedComment(idAnsweredComment);
 
-        Comment comment = new Comment(originalComment.getIdMovie(), user, commentDTO.getDescription(), commentDTO.getIdAnsweredComment(), idAnsweredComment);
+        String idLinkedComment = null;
+        if (!commentDTO.getIdLinkedComment().isEmpty()) idLinkedComment = commentDTO.getIdLinkedComment().toString();
+        Comment comment = new Comment(originalComment.getIdMovie(), user, commentDTO.getDescription(), idLinkedComment, idAnsweredComment);
         comment = saveComment(comment);
 
         userService.updateUserScoreAndProfile(user);
@@ -79,8 +84,9 @@ public class CommentService {
         return new CommentAnswerDTO(originalComment, comment, omdbRepository.findById(originalComment.getIdMovie()));
     }
 
-    public CommentReactionDTO reactToComment(Reaction reaction, long commentId, String token) {
+    public CommentReactionDTO reactToComment(CommentReactionEntryDTO reactionDTO, long commentId, String token) {
         
+        Reaction reaction = reactionDTO.getReaction();
         User user = userService.findUserByToken(token);
         userService.validateProfile(user, Profile.ADVANCED);
 
