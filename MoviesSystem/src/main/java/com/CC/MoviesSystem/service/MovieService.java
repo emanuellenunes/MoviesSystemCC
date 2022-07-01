@@ -42,7 +42,7 @@ public class MovieService {
         MovieDetails movieDetails = omdbRepository.findById(idMovie);
         Optional<Movie> movie = movieRepository.findById(idMovie);
         if (movie.isPresent()) {
-            return new MovieDTO(movieDetails, movie.get().getCommentList(), movie.get().getRatingList());
+            return new MovieDTO(movieDetails, movie.get().getCommentSet(), movie.get().getRatingSet());
         }
         return new MovieDTO(movieDetails);
     }

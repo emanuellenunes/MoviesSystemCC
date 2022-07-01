@@ -27,7 +27,7 @@ public class Comment {
     @Column(nullable = false)
     private String idMovie;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="USERS")
     private User user;
     

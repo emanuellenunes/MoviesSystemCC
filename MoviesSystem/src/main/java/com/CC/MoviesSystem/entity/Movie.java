@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -23,13 +24,13 @@ public class Movie {
     @Id
     private String id;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name="COMMENT")
-    private Set<Comment> commentList;
+    private Set<Comment> commentSet;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name="RATING")
-    private Set<Rating> ratingList;
+    private Set<Rating> ratingSet;
 
     public Movie(String id) {
         this.id = id;

@@ -12,11 +12,11 @@ import com.CC.MoviesSystem.entity.MultiMoviePreview;
 public interface OMDBRepository {
 
     @GetMapping
-    @Cacheable("movieCache")
+    @Cacheable("OMDBCache")
     MovieDetails findById(@RequestParam("i") String movieId);
 
     @GetMapping
-    @Cacheable("multiMovieCache")
+    @Cacheable("multiOMDBCache")
     MultiMoviePreview findByTitle(@RequestParam("s") String movieTitle);
     
 }

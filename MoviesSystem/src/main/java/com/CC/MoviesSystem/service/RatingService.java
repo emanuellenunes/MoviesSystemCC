@@ -53,7 +53,7 @@ public class RatingService {
     }
 
     private void validateRating(int score) {
-        assert score >= 0 && score <= 10 : new UnformattedDataException();
+        if (score < 0 || score > 10) throw new UnformattedDataException();
     }
 
     public RatingDTO searchRatingById(long ratingId, String token) {
@@ -73,15 +73,15 @@ public class RatingService {
     private void saveRating(Rating rating){
         ratingRepository.save(rating);
 
-        Set<Rating> ratingList = new HashSet<Rating>();
-        Set<Comment> commentList = new HashSet<Comment>();
+        Set<Rating> ratingSet = new HashSet<Rating>();
+        Set<Comment> commentSet = new HashSet<Comment>();
         Optional<Movie> existentMovie = movieRepository.findById(rating.getIdMovie());
         if (existentMovie.isPresent()) {
-            ratingList = existentMovie.get().getRatingList();
-            commentList = existentMovie.get().getCommentList();
+            ratingSet = existentMovie.get().getRatingSet();
+            commentSet = existentMovie.get().getCommentSet();
         }
-        ratingList.add(rating);
-        movieRepository.save(new Movie(rating.getIdMovie(), commentList, ratingList));
+        ratingSet.add(rating);
+        movieRepository.save(new Movie(rating.getIdMovie(), commentSet, ratingSet));
     }
     
 }

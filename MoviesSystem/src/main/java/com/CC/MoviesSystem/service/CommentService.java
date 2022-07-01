@@ -1,6 +1,7 @@
 package com.CC.MoviesSystem.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -72,16 +73,20 @@ public class CommentService {
         User user = userService.findUserByToken(token);
         userService.validateProfile(user, Profile.BASIC);
 
-        Comment originalComment = validateReferencedComment(idAnsweredComment);
+        Comment answeredComment = validateReferencedComment(idAnsweredComment);
 
+        //Can only answer primary comments
+        if (answeredComment.getIdAnsweredComment() != null) {
+            throw new InvalidIdException("idAnsweredComment belongs to an answer so it");
+        }
         String idLinkedComment = null;
         if (!commentDTO.getIdLinkedComment().isEmpty()) idLinkedComment = commentDTO.getIdLinkedComment().toString();
-        Comment comment = new Comment(originalComment.getIdMovie(), user, commentDTO.getDescription(), idLinkedComment, idAnsweredComment);
+        Comment comment = new Comment(answeredComment.getIdMovie(), user, commentDTO.getDescription(), idLinkedComment, idAnsweredComment);
         comment = saveComment(comment);
 
         userService.updateUserScoreAndProfile(user);
 
-        return new CommentAnswerDTO(originalComment, comment, omdbRepository.findById(originalComment.getIdMovie()));
+        return new CommentAnswerDTO(answeredComment, comment, omdbRepository.findById(answeredComment.getIdMovie()));
     }
 
     public CommentReactionDTO reactToComment(CommentReactionEntryDTO reactionDTO, long commentId, String token) {
@@ -149,7 +154,7 @@ public class CommentService {
         Comment comment = validateReferencedComment(commentId);
 
         //Can only delete its own comments
-        assert comment.getUser().equals(user) : new UnauthorizedUserException();
+        if (!comment.getUser().equals(user)) throw new UnauthorizedUserException();
 
         deleteComment(comment);
         return new CommentDTO(comment, omdbRepository.findById(comment.getIdMovie()));
@@ -161,33 +166,54 @@ public class CommentService {
 
     private Comment saveComment(Comment comment){
 
-        Set<Rating> ratingList = new HashSet<Rating>();
+        Set<Rating> ratingSet = new HashSet<Rating>();
         Set<Comment> commentList = new HashSet<Comment>();
         Optional<Movie> existentMovie = movieRepository.findById(comment.getIdMovie());
         if (existentMovie.isPresent()) {
-            ratingList = existentMovie.get().getRatingList();
-            commentList = existentMovie.get().getCommentList();
+            ratingSet = existentMovie.get().getRatingSet();
+            commentList = existentMovie.get().getCommentSet();
         }
         commentList.add(comment);
-        movieRepository.save(new Movie(comment.getIdMovie(), commentList, ratingList));
+        movieRepository.save(new Movie(comment.getIdMovie(), commentList, ratingSet));
 
         return commentRepository.save(comment);
     }
 
     private Comment deleteComment(Comment comment){
 
-        Set<Rating> ratingList = new HashSet<Rating>();
+        Long commentId = comment.getId();
+
+        Optional<List<Comment>> commentAnswers = commentRepository.findByIdAnsweredComment(commentId);
+
+        if (commentAnswers.isPresent()){
+            //For each comment, remove its reactions and remove it from its Movie Entity
+            for (Comment c : commentAnswers.get()) {
+                commentReactionRepository.removeByComment(c);
+                deleteFromMovieDB(c);
+            }
+            //Delete all comment answers
+            commentRepository.removeByIdAnsweredComment(commentId);
+        }
+        //Remove the comment's reactions and remove it from its Movie Entity
+        commentReactionRepository.removeByComment(comment);
+        deleteFromMovieDB(comment);
+        //Finally delete the comment itself
+        commentRepository.delete(comment);
+
+        return comment;
+    }
+
+    private void deleteFromMovieDB(Comment comment){
+        Set<Rating> ratingSet = new HashSet<Rating>();
         Set<Comment> commentList = new HashSet<Comment>();
+        //Sim it's cacheable, this is will be less time consuming
         Optional<Movie> existentMovie = movieRepository.findById(comment.getIdMovie());
         if (existentMovie.isPresent()) {
-            ratingList = existentMovie.get().getRatingList();
-            commentList = existentMovie.get().getCommentList();
+            ratingSet = existentMovie.get().getRatingSet();
+            commentList = existentMovie.get().getCommentSet();
         }
         commentList.remove(comment);
-        movieRepository.save(new Movie(comment.getIdMovie(), commentList, ratingList));
-
-        commentRepository.delete(comment);
-        return comment;
+        movieRepository.save(new Movie(comment.getIdMovie(), commentList, ratingSet));
     }
     
 }

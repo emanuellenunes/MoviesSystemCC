@@ -12,4 +12,6 @@ import com.CC.MoviesSystem.entity.User;
 @Repository
 public interface CommentReactionRepository extends JpaRepository<CommentReaction, Long> {
     Optional<CommentReaction> findByUserAndComment(User user, Comment comment);
+    Optional<CommentReaction> findByComment(Comment comment);
+    Optional<CommentReaction> removeByComment(Comment comment);
 }
