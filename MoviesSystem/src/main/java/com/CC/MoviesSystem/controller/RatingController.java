@@ -32,24 +32,26 @@ public class RatingController {
     @ApiOperation(value = "Rate a movie")
     @PostMapping("/rate/")
     public ResponseEntity<RatingDTO> rate(@RequestHeader String Authorization, @RequestParam String movieId, @Valid @RequestBody int score) {
-        RatingDTO rating = ratingService.rate(movieId, score, Authorization);
-        return new ResponseEntity<RatingDTO>(rating, HttpStatus.OK);
+        try {
+            RatingDTO rating = ratingService.rate(movieId, score, Authorization);
+            return new ResponseEntity<RatingDTO>(rating, HttpStatus.OK);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @ApiOperation(value = "Show comment by its Id")
     @Transactional
     @GetMapping("/rating/id={ratingId}")
     public ResponseEntity<RatingDTO> searchRatingById(@RequestHeader String Authorization, @PathVariable long ratingId) {
-        //RatingDTO rating = ratingService.searchRatingById(ratingId, Authorization);
-        //return new ResponseEntity<RatingDTO>(rating, HttpStatus.OK);
-        ResponseEntity<RatingDTO> response = ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
         try {
             RatingDTO rating = ratingService.searchRatingById(ratingId, Authorization);
-            response = ResponseEntity.status(HttpStatus.OK).body(rating);
+            return new ResponseEntity<RatingDTO>(rating, HttpStatus.OK);
         } catch(Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-        return response; //new ResponseEntity<RatingDTO>(rating, HttpStatus.OK);
     }
     
 }

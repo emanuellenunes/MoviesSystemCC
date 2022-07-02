@@ -35,7 +35,12 @@ public class UserRegistrationController {
     @ApiOperation(value = "Register a new user in the System and return its token")
     @PostMapping
     public ResponseEntity<String> registrate(@RequestBody UserDTO userRegistrationDTO) {
-        User user = userRegistrationService.registrate(userRegistrationDTO.toUser());
-        return new ResponseEntity<String>(user.toDTO("Bearer ").getToken(), HttpStatus.CREATED);
+        try {
+            User user = userRegistrationService.registrate(userRegistrationDTO.toUser());
+            return new ResponseEntity<String>(user.toDTO("Bearer ").getToken(), HttpStatus.CREATED);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 }

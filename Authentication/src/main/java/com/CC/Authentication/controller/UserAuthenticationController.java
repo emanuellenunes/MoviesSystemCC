@@ -29,8 +29,13 @@ public class UserAuthenticationController {
 
     @ApiOperation(value = "Log the user in the System and return its token")
     @PostMapping
-    public ResponseEntity<String> authenticate(@RequestBody LoginDTO loginData, @RequestHeader String Authorization){
-        User user = userAuthenticationService.authenticate(loginData, Authorization);
-        return new ResponseEntity<String>(user.toDTO("Bearer ").getToken(), HttpStatus.ACCEPTED);
+    public ResponseEntity<String> authenticate(@RequestBody LoginDTO loginData, @RequestHeader String Authorization) {
+        try {
+            User user = userAuthenticationService.authenticate(loginData, Authorization);
+            return new ResponseEntity<String>(user.toDTO("Bearer ").getToken(), HttpStatus.ACCEPTED);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 }

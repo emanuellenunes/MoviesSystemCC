@@ -29,15 +29,25 @@ public class UserController {
     @ApiOperation(value = "Show User info")
     @GetMapping
     public ResponseEntity<UserDTO> searchUserByToken(@RequestHeader String Authorization) {
-        UserDTO userDTO = userService.searchUserByToken(Authorization);
-        return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
+        try {
+            UserDTO userDTO = userService.searchUserByToken(Authorization);
+            return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @ApiOperation(value = "Turn another user a MODERATOR by email")
     @PostMapping("/turn-moderator")
     public ResponseEntity<UserDTO> turnModerator(@RequestHeader String Authorization, @RequestBody String email) {
-        UserDTO userDTO = userService.turnModerator(email, Authorization);
-        return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
+        try {
+            UserDTO userDTO = userService.turnModerator(email, Authorization);
+            return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
     
 }
