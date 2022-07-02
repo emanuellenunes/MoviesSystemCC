@@ -206,7 +206,6 @@ public class CommentService {
     private void deleteFromMovieDB(Comment comment){
         Set<Rating> ratingSet = new HashSet<Rating>();
         Set<Comment> commentList = new HashSet<Comment>();
-        //Sim it's cacheable, this is will be less time consuming
         Optional<Movie> existentMovie = movieRepository.findById(comment.getIdMovie());
         if (existentMovie.isPresent()) {
             ratingSet = existentMovie.get().getRatingSet();
